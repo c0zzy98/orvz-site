@@ -4,15 +4,15 @@ function SectionHeading({ eyebrow, title, description }) {
   return (
     <div className="max-w-3xl mb-12 text-left">
       {eyebrow && (
-        <p className="text-xs md:text-sm uppercase tracking-[0.28em] text-gray-500 mb-4">
+        <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[#A7ADB5] md:text-sm">
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl md:text-5xl font-light tracking-[0.04em] text-white leading-tight">
+      <h2 className="text-3xl font-light leading-tight tracking-[0.04em] text-[#F1F4F6] md:text-5xl">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#C7CCD3] md:text-lg">
           {description}
         </p>
       )}
@@ -33,13 +33,24 @@ function Reveal({ children, delay = 0, y = 36 }) {
   );
 }
 
+function SectionShell({ id, className = "", children }) {
+  return (
+    <section
+      id={id}
+      className={`bg-gradient-to-b from-black via-[#0C0F12] to-black ${className}`.trim()}
+    >
+      <div className="mx-auto max-w-6xl px-6 md:px-8">{children}</div>
+    </section>
+  );
+}
+
 function IconWrapper({ children, label, href = "#" }) {
   return (
     <a
       href={href}
       aria-label={label}
       title={label}
-      className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-800 bg-gray-950 text-gray-400 transition duration-300 hover:border-gray-600 hover:text-white hover:-translate-y-0.5"
+      className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#2B3138] bg-[#0C0F12] text-[#C7CCD3] transition duration-300 hover:-translate-y-0.5 hover:border-[#8E98A3] hover:text-white"
     >
       <span className="sr-only">{label}</span>
       {children}
@@ -92,56 +103,89 @@ const contactDetails = [
   "Telefon: +48 502 629 060",
 ];
 
+const reasons = [
+  {
+    title: "Unikalne projektowanie",
+    desc: "Każdy projekt powstaje indywidualnie, dopasowany do stylu życia i przestrzeni klienta.",
+  },
+  {
+    title: "Rzemiosło i technologia",
+    desc: "Łączymy tradycyjne rzemiosło z nowoczesnymi technologiami dla perfekcyjnego efektu.",
+  },
+  {
+    title: "Wsparcie klienta",
+    desc: "Prowadzimy klienta przez cały proces – od koncepcji po montaż.",
+  },
+];
+
+const quickContactCards = [
+  {
+    title: "Biuro",
+    lines: ["ul. Ludowa 16", "58-560 Jelenia Góra", "orazmeble@gmail.com"],
+  },
+  {
+    title: "Konsultacja",
+    lines: ["Jakub Gorlach", "tel. 530 497 662", "gorlachjakub@gmail.com"],
+  },
+  {
+    title: "Projekt i wycena",
+    lines: ["Michał Tyrański", "tel. 502 629 060", "tyranski.michal@wp.pl"],
+  },
+];
+
+const realizations = [1, 2, 3, 4, 5, 6];
+
 export default function OrvzPage() {
   return (
-    <div className="bg-black text-white font-sans scroll-smooth min-h-screen">
-      {/* NAV */}
-      <nav className="flex justify-between items-center px-8 py-6 border-b border-gray-800">
-        <h1 className="text-xl tracking-widest">ORVZ.EU</h1>
-        <div className="space-x-6 text-sm">
-          <a href="#realizacje" className="hover:text-gray-300 transition-colors duration-300">
-            Realizacje
-          </a>
-          <a href="#onas" className="hover:text-gray-300 transition-colors duration-300">
-            O nas
-          </a>
-          <a href="#kontakt" className="hover:text-gray-300 transition-colors duration-300">
-            Kontakt
-          </a>
+    <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
+      <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-8">
+          <h1 className="text-xl tracking-[0.28em] text-[#E9EDF2]">ORVZ.EU</h1>
+          <div className="space-x-6 text-sm">
+            <a href="#realizacje" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+              Realizacje
+            </a>
+            <a href="#onas" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+              O nas
+            </a>
+            <a href="#kontakt" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+              Kontakt
+            </a>
+          </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="min-h-[90vh] flex flex-col justify-center items-center text-center px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.08em] leading-tight"
-        >
-          Meble na wymiar
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-6 text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed"
-        >
-          Tworzymy unikalne wnętrza premium dopasowane do Twojej przestrzeni i stylu życia.
-        </motion.p>
-        <motion.a
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          href="#realizacje"
-          className="mt-10 inline-block px-8 py-3 border border-white hover:bg-white hover:text-black transition duration-500"
-        >
-          Zobacz realizacje
-        </motion.a>
-      </section>
+      <SectionShell className="min-h-[90vh] flex items-center">
+        <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-light leading-tight tracking-[0.08em] text-[#F3F5F7] md:text-7xl lg:text-8xl"
+          >
+            Meble na wymiar
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="mt-6 max-w-2xl text-base leading-relaxed text-[#C7CCD3] md:text-lg"
+          >
+            Tworzymy unikalne wnętrza premium dopasowane do Twojej przestrzeni i stylu życia.
+          </motion.p>
+          <motion.a
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            href="#realizacje"
+            className="mt-10 inline-block rounded-full border border-[#BFC7D1] px-8 py-3 text-[#E6EBF0] shadow-[0_0_30px_rgba(191,199,209,0.08)] transition duration-500 hover:bg-[#BFC7D1] hover:text-black"
+          >
+            Zobacz realizacje
+          </motion.a>
+        </div>
+      </SectionShell>
 
-      {/* REALIZACJE */}
-      <section id="realizacje" className="px-6 py-24 md:py-32">
+      <SectionShell id="realizacje" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
             eyebrow="Realizacje"
@@ -150,17 +194,16 @@ export default function OrvzPage() {
           />
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <div className="bg-gray-900 h-64 md:h-80 rounded-2xl border border-gray-800 hover:-translate-y-1 hover:scale-[1.02] transition duration-500" />
+        <div className="grid gap-6 md:grid-cols-3">
+          {realizations.map((item, index) => (
+            <Reveal key={item} delay={index * 0.05}>
+              <div className="h-64 rounded-2xl border border-[#2B3138] bg-[#11151A] transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80" />
             </Reveal>
           ))}
         </div>
-      </section>
+      </SectionShell>
 
-      {/* O NAS */}
-      <section id="onas" className="px-6 py-24 md:py-32 bg-gray-950">
+      <SectionShell id="onas" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
             eyebrow="Dlaczego my"
@@ -169,79 +212,31 @@ export default function OrvzPage() {
           />
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Unikalne projektowanie",
-              desc: "Każdy projekt powstaje indywidualnie, dopasowany do stylu życia i przestrzeni klienta.",
-            },
-            {
-              title: "Rzemiosło i technologia",
-              desc: "Łączymy tradycyjne rzemiosło z nowoczesnymi technologiami dla perfekcyjnego efektu.",
-            },
-            {
-              title: "Wsparcie klienta",
-              desc: "Prowadzimy klienta przez cały proces – od koncepcji po montaż.",
-            },
-          ].map((item, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div className="group relative h-80 rounded-2xl overflow-hidden border border-gray-800 bg-gray-900">
-                {/* IMAGE PLACEHOLDER */}
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-black opacity-60" />
-
-                {/* CONTENT */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <h4 className="text-xl mb-2 tracking-wide">{item.title}</h4>
-
-                  {/* HOVER TEXT */}
-                  <p className="text-sm text-gray-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500">
+        <div className="grid gap-8 md:grid-cols-3">
+          {reasons.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.1}>
+              <div className="group relative h-80 overflow-hidden rounded-2xl border border-[#2B3138] bg-[#11151A]">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#2F3640] to-black opacity-60" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 transition duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <h4 className="mb-2 text-xl tracking-wide text-[#F1F4F6]">{item.title}</h4>
+                  <p className="translate-y-4 text-sm text-[#D8DDE3] opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                     {item.desc}
                   </p>
                 </div>
-
-                {/* HOVER OVERLAY */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500" />
               </div>
             </Reveal>
           ))}
         </div>
-      </section>
+      </SectionShell>
 
-      {/* LOKALIZACJE / KONTAKT SZYBKI */}
-      <section className="px-6 py-16 md:py-20">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Biuro",
-              lines: [
-                "ul. Ludowa 16",
-                "58-560 Jelenia Góra",
-                "orazmeble@gmail.com",
-              ],
-            },
-            {
-              title: "Konsultacja",
-              lines: [
-                "Jakub Gorlach",
-                "tel. 530 497 662",
-                "gorlachjakub@gmail.com",
-              ],
-            },
-            {
-              title: "Projekt i wycena",
-              lines: [
-                "Michał Tyrański",
-                "tel. 502 629 060",
-                "tyranski.michal@wp.pl",
-              ],
-            },
-          ].map((item, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div className="border border-gray-800 rounded-2xl p-8 text-center hover:border-gray-600 transition duration-500">
-                <h4 className="text-lg tracking-wide mb-6 uppercase text-white">
-                  {item.title}
-                </h4>
-                <div className="space-y-2 text-gray-400 text-sm leading-relaxed">
+      <SectionShell className="py-16 md:py-20">
+        <div className="grid gap-8 md:grid-cols-3">
+          {quickContactCards.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.1}>
+              <div className="rounded-2xl border border-[#2B3138] p-8 text-center transition duration-500 hover:border-[#8E98A3]">
+                <h4 className="mb-6 text-lg uppercase tracking-wide text-white">{item.title}</h4>
+                <div className="space-y-2 text-sm leading-relaxed text-[#C7CCD3]">
                   {item.lines.map((line) => (
                     <p key={line}>{line}</p>
                   ))}
@@ -250,10 +245,9 @@ export default function OrvzPage() {
             </Reveal>
           ))}
         </div>
-      </section>
+      </SectionShell>
 
-      {/* KONTAKT */}
-      <section id="kontakt" className="px-6 py-24 md:py-32">
+      <SectionShell id="kontakt" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
             eyebrow="Kontakt"
@@ -262,36 +256,32 @@ export default function OrvzPage() {
           />
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <Reveal delay={0.1}>
             <form className="space-y-4">
               <input
                 type="text"
                 placeholder="Imię i nazwisko"
-                className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:border-white"
+                className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
-
               <input
                 type="email"
                 placeholder="Adres email"
-                className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:border-white"
+                className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
-
               <input
                 type="tel"
                 placeholder="Numer telefonu"
-                className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:border-white"
+                className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
-
               <textarea
                 placeholder="Opisz krótko projekt (np. kuchnia, garderoba, metraż, lokalizacja...)"
                 rows={4}
-                className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:border-white"
+                className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
-
               <button
                 type="submit"
-                className="w-full mt-4 px-6 py-3 border border-white hover:bg-white hover:text-black transition duration-500 rounded-xl"
+                className="mt-4 w-full rounded-xl border border-[#BFC7D1] px-6 py-3 text-[#E6EBF0] transition duration-500 hover:bg-[#BFC7D1] hover:text-black"
               >
                 Umów konsultację
               </button>
@@ -299,32 +289,30 @@ export default function OrvzPage() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="space-y-3 text-gray-400">
+            <div className="space-y-3 text-[#C7CCD3]">
               {contactDetails.map((detail) => (
                 <p key={detail}>{detail}</p>
               ))}
-
-              <div className="mt-6 text-sm text-gray-500">
+              <div className="mt-6 text-sm text-[#A7ADB5]">
                 <p>Odpowiadamy zazwyczaj w ciągu 24h</p>
                 <p>Realizacje premium na terenie całej Polski</p>
               </div>
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
 
-      {/* FOOTER */}
-      <footer className="border-t border-gray-800 px-6 py-16 text-sm text-gray-400">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+      <footer className="border-t border-[#2B3138] px-6 py-16 text-sm text-[#C7CCD3]">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
           <div>
-            <h4 className="text-white text-lg tracking-widest mb-4">ORAZ MEBLE</h4>
-            <p className="text-gray-500 text-sm leading-relaxed">
+            <h4 className="mb-4 text-lg tracking-widest text-white">ORAZ MEBLE</h4>
+            <p className="text-sm leading-relaxed text-[#A7ADB5]">
               Meble na wymiar dla klientów premium. Projektujemy i realizujemy wnętrza dopasowane do Twojego stylu życia.
             </p>
           </div>
 
           <div>
-            <h5 className="text-white mb-4">Kontakt</h5>
+            <h5 className="mb-4 text-white">Kontakt</h5>
             <div className="space-y-2">
               {contactDetails.map((detail) => (
                 <p key={`footer-${detail}`}>{detail}</p>
@@ -333,9 +321,8 @@ export default function OrvzPage() {
           </div>
 
           <div>
-            <h5 className="text-white mb-4">Dane firmy</h5>
+            <h5 className="mb-4 text-white">Dane firmy</h5>
             <p>NIP: 611 135 13 84</p>
-
             <div className="mt-6 flex gap-4">
               {socialLinks.map(({ label, href, Icon }) => (
                 <IconWrapper key={label} label={label} href={href}>
@@ -346,7 +333,7 @@ export default function OrvzPage() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
+        <div className="mx-auto mt-12 max-w-6xl border-t border-[#2B3138] pt-6 text-center text-xs text-[#8A9098]">
           © {new Date().getFullYear()} ORAZ MEBLE. Wszelkie prawa zastrzeżone.
         </div>
       </footer>

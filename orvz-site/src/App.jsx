@@ -126,9 +126,9 @@ function XIcon() {
 }
 
 const socialLinks = [
-  { label: "Facebook", href: "#", Icon: FacebookIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
-  { label: "TikTok", href: "#", Icon: TikTokIcon },
+  { label: "Facebook", href: "https://www.facebook.com/orazmeble", Icon: FacebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/oraz.meble/", Icon: InstagramIcon },
+  { label: "TikTok", href: "https://www.tiktok.com/@oraz.meble", Icon: TikTokIcon },
   { label: "X", href: "#", Icon: XIcon },
 ];
 

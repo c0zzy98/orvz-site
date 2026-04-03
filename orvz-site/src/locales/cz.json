@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "realizacje": "Portfolio",
+    "onas": "O nás",
+    "kontakt": "Kontakt"
+  },
+  "hero": {
+    "title": "Nábytek na míru",
+    "subtitle": "Tvoříme jedinečné prémiové interiéry přizpůsobené vašemu prostoru a životnímu stylu.",
+    "cta": "Zobrazit portfolio"
+  },
+  "realizacje": {
+    "eyebrow": "Portfolio",
+    "title": "Vybrané realizace",
+    "description": "Minimalismus, preciznost a prémiové materiály. Každý projekt vzniká individuálně pro konkrétní prostor."
+  },
+  "onas": {
+    "eyebrow": "Proč my",
+    "title": "Proč nám můžete důvěřovat",
+    "description": "Vytváříme řešení, která spojují design, funkčnost a nejvyšší kvalitu zpracování."
+  },
+  "reasons": [
+    {
+      "title": "Unikátní design",
+      "desc": "Každý projekt vzniká individuálně, přizpůsobený životnímu stylu a prostoru klienta."
+    },
+    {
+      "title": "Řemeslo a technologie",
+      "desc": "Kombinujeme tradiční řemeslo s moderními technologiemi pro dokonalý výsledek."
+    },
+    {
+      "title": "Podpora klienta",
+      "desc": "Provázíme klienta celým procesem – od konceptu po montáž."
+    }
+  ],
+  "quickCards": [
+    { "title": "Kancelář" },
+    { "title": "Konzultace" },
+    { "title": "Design a nabídka" }
+  ],
+  "kontakt": {
+    "eyebrow": "Kontakt",
+    "title": "Domluvte si bezplatnou konzultaci",
+    "description": "Řekněte nám o svém prostoru a do 24 hodin se vám ozveme s návrhem dalšího postupu."
+  },
+  "form": {
+    "name": "Jméno a příjmení",
+    "email": "E-mailová adresa",
+    "phone": "Telefonní číslo",
+    "message": "Stručně popište projekt (např. kuchyně, šatna, plocha, lokalita...)",
+    "submit": "Domluvit konzultaci"
+  },
+  "response": {
+    "time": "Obvykle odpovídáme do 24h",
+    "area": "Prémiové realizace po celém Polsku"
+  },
+  "footer": {
+    "brandDesc": "Nábytek na míru pro prémiové klienty. Navrhujeme a realizujeme interiéry přizpůsobené vašemu životnímu stylu.",
+    "contact": "Kontakt",
+    "company": "Firemní údaje",
+    "copyright": "ORAZ MEBLE. Všechna práva vyhrazena."
+  }
+}

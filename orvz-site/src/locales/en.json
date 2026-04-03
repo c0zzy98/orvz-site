@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "realizacje": "Portfolio",
+    "onas": "About us",
+    "kontakt": "Contact"
+  },
+  "hero": {
+    "title": "Custom furniture",
+    "subtitle": "We create unique premium interiors tailored to your space and lifestyle.",
+    "cta": "View portfolio"
+  },
+  "realizacje": {
+    "eyebrow": "Portfolio",
+    "title": "Selected projects",
+    "description": "Minimalism, precision and premium materials. Every project is individually crafted for a specific space."
+  },
+  "onas": {
+    "eyebrow": "Why us",
+    "title": "Why you can trust us",
+    "description": "We create solutions that combine design, functionality and the highest quality workmanship."
+  },
+  "reasons": [
+    {
+      "title": "Unique design",
+      "desc": "Each project is created individually, tailored to the client's lifestyle and space."
+    },
+    {
+      "title": "Craftsmanship & technology",
+      "desc": "We combine traditional craftsmanship with modern technologies for a perfect result."
+    },
+    {
+      "title": "Client support",
+      "desc": "We guide the client through the entire process – from concept to installation."
+    }
+  ],
+  "quickCards": [
+    { "title": "Office" },
+    { "title": "Consultation" },
+    { "title": "Design & quote" }
+  ],
+  "kontakt": {
+    "eyebrow": "Contact",
+    "title": "Book a free consultation",
+    "description": "Tell us about your space and we will get back to you with a proposal within 24 hours."
+  },
+  "form": {
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "message": "Briefly describe the project (e.g. kitchen, wardrobe, area, location...)",
+    "submit": "Book consultation"
+  },
+  "response": {
+    "time": "We usually respond within 24h",
+    "area": "Premium projects across Poland"
+  },
+  "footer": {
+    "brandDesc": "Custom furniture for premium clients. We design and execute interiors tailored to your lifestyle.",
+    "contact": "Contact",
+    "company": "Company details",
+    "copyright": "ORAZ MEBLE. All rights reserved."
+  }
+}

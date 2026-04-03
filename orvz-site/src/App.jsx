@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { LanguageProvider, useTranslation } from "./i18n/LanguageContext";
 
 function SectionHeading({ eyebrow, title, description }) {
   return (
@@ -103,54 +104,61 @@ const contactDetails = [
   "Telefon: +48 502 629 060",
 ];
 
-const reasons = [
-  {
-    title: "Unikalne projektowanie",
-    desc: "Każdy projekt powstaje indywidualnie, dopasowany do stylu życia i przestrzeni klienta.",
-  },
-  {
-    title: "Rzemiosło i technologia",
-    desc: "Łączymy tradycyjne rzemiosło z nowoczesnymi technologiami dla perfekcyjnego efektu.",
-  },
-  {
-    title: "Wsparcie klienta",
-    desc: "Prowadzimy klienta przez cały proces – od koncepcji po montaż.",
-  },
+const quickContactCardLines = [
+  ["ul. Ludowa 16", "58-560 Jelenia Góra", "orazmeble@gmail.com"],
+  ["Jakub Gorlach", "tel. 530 497 662", "gorlachjakub@gmail.com"],
+  ["Michał Tyrański", "tel. 502 629 060", "tyranski.michal@wp.pl"],
 ];
 
-const quickContactCards = [
-  {
-    title: "Biuro",
-    lines: ["ul. Ludowa 16", "58-560 Jelenia Góra", "orazmeble@gmail.com"],
-  },
-  {
-    title: "Konsultacja",
-    lines: ["Jakub Gorlach", "tel. 530 497 662", "gorlachjakub@gmail.com"],
-  },
-  {
-    title: "Projekt i wycena",
-    lines: ["Michał Tyrański", "tel. 502 629 060", "tyranski.michal@wp.pl"],
-  },
-];
+const LANGUAGES = ["pl", "en", "de", "cz"];
 
 const realizations = [1, 2, 3, 4, 5, 6];
 
-export default function OrvzPage() {
+function LanguageSwitcher() {
+  const { lang, setLang } = useTranslation();
+  return (
+    <div className="flex items-center gap-1">
+      {LANGUAGES.map((l, index) => (
+        <span key={l} className="flex items-center">
+          <button
+            onClick={() => setLang(l)}
+            className={`text-xs uppercase tracking-widest px-1.5 py-0.5 transition-colors duration-200 ${
+              lang === l
+                ? "text-white"
+                : "text-[#A7ADB5] hover:text-[#D8DDE3]"
+            }`}
+          >
+            {l}
+          </button>
+          {index < LANGUAGES.length - 1 && (
+            <span className="text-[#2B3138] text-xs select-none">|</span>
+          )}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function OrvzPage() {
+  const { t, locale } = useTranslation();
   return (
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-8">
           <h1 className="text-xl tracking-[0.28em] text-[#E9EDF2]">ORVZ.EU</h1>
-          <div className="space-x-6 text-sm">
-            <a href="#realizacje" className="transition-colors duration-300 hover:text-[#D8DDE3]">
-              Realizacje
-            </a>
-            <a href="#onas" className="transition-colors duration-300 hover:text-[#D8DDE3]">
-              O nas
-            </a>
-            <a href="#kontakt" className="transition-colors duration-300 hover:text-[#D8DDE3]">
-              Kontakt
-            </a>
+          <div className="flex items-center gap-6">
+            <div className="space-x-6 text-sm">
+              <a href="#realizacje" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+                {t("nav.realizacje")}
+              </a>
+              <a href="#onas" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+                {t("nav.onas")}
+              </a>
+              <a href="#kontakt" className="transition-colors duration-300 hover:text-[#D8DDE3]">
+                {t("nav.kontakt")}
+              </a>
+            </div>
+            <LanguageSwitcher />
           </div>
         </div>
       </nav>
@@ -163,7 +171,7 @@ export default function OrvzPage() {
             transition={{ duration: 0.8 }}
             className="text-5xl font-light leading-tight tracking-[0.08em] text-[#F3F5F7] md:text-7xl lg:text-8xl"
           >
-            Meble na wymiar
+            {t("hero.title")}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -171,7 +179,7 @@ export default function OrvzPage() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="mt-6 max-w-2xl text-base leading-relaxed text-[#C7CCD3] md:text-lg"
           >
-            Tworzymy unikalne wnętrza premium dopasowane do Twojej przestrzeni i stylu życia.
+            {t("hero.subtitle")}
           </motion.p>
           <motion.a
             initial={{ opacity: 0, y: 20 }}
@@ -180,7 +188,7 @@ export default function OrvzPage() {
             href="#realizacje"
             className="mt-10 inline-block rounded-full border border-[#BFC7D1] px-8 py-3 text-[#E6EBF0] shadow-[0_0_30px_rgba(191,199,209,0.08)] transition duration-500 hover:bg-[#BFC7D1] hover:text-black"
           >
-            Zobacz realizacje
+            {t("hero.cta")}
           </motion.a>
         </div>
       </SectionShell>
@@ -188,9 +196,9 @@ export default function OrvzPage() {
       <SectionShell id="realizacje" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
-            eyebrow="Realizacje"
-            title="Wybrane realizacje"
-            description="Minimalizm, precyzja wykonania i materiały premium. Każdy projekt powstaje indywidualnie pod konkretną przestrzeń."
+            eyebrow={t("realizacje.eyebrow")}
+            title={t("realizacje.title")}
+            description={t("realizacje.description")}
           />
         </Reveal>
 
@@ -206,14 +214,14 @@ export default function OrvzPage() {
       <SectionShell id="onas" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
-            eyebrow="Dlaczego my"
-            title="Dlaczego warto nam zaufać"
-            description="Tworzymy rozwiązania, które łączą design, funkcjonalność i najwyższą jakość wykonania."
+            eyebrow={t("onas.eyebrow")}
+            title={t("onas.title")}
+            description={t("onas.description")}
           />
         </Reveal>
 
         <div className="grid gap-8 md:grid-cols-3">
-          {reasons.map((item, index) => (
+          {locale.reasons.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.1}>
               <div className="group relative h-80 overflow-hidden rounded-2xl border border-[#2B3138] bg-[#11151A]">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#2F3640] to-black opacity-60" />
@@ -232,12 +240,14 @@ export default function OrvzPage() {
 
       <SectionShell className="py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-3">
-          {quickContactCards.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.1}>
+          {quickContactCardLines.map((lines, index) => (
+            <Reveal key={index} delay={index * 0.1}>
               <div className="rounded-2xl border border-[#2B3138] p-8 text-center transition duration-500 hover:border-[#8E98A3]">
-                <h4 className="mb-6 text-lg uppercase tracking-wide text-white">{item.title}</h4>
+                <h4 className="mb-6 text-lg uppercase tracking-wide text-white">
+                  {locale.quickCards[index].title}
+                </h4>
                 <div className="space-y-2 text-sm leading-relaxed text-[#C7CCD3]">
-                  {item.lines.map((line) => (
+                  {lines.map((line) => (
                     <p key={line}>{line}</p>
                   ))}
                 </div>
@@ -250,9 +260,9 @@ export default function OrvzPage() {
       <SectionShell id="kontakt" className="py-24 md:py-32">
         <Reveal>
           <SectionHeading
-            eyebrow="Kontakt"
-            title="Umów się na bezpłatną konsultację"
-            description="Opowiedz nam o swojej przestrzeni, a wrócimy z propozycją dalszych kroków w ciągu 24 godzin."
+            eyebrow={t("kontakt.eyebrow")}
+            title={t("kontakt.title")}
+            description={t("kontakt.description")}
           />
         </Reveal>
 
@@ -261,21 +271,21 @@ export default function OrvzPage() {
             <form className="space-y-4">
               <input
                 type="text"
-                placeholder="Imię i nazwisko"
+                placeholder={t("form.name")}
                 className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
               <input
                 type="email"
-                placeholder="Adres email"
+                placeholder={t("form.email")}
                 className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
               <input
                 type="tel"
-                placeholder="Numer telefonu"
+                placeholder={t("form.phone")}
                 className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
               <textarea
-                placeholder="Opisz krótko projekt (np. kuchnia, garderoba, metraż, lokalizacja...)"
+                placeholder={t("form.message")}
                 rows={4}
                 className="w-full rounded-xl border border-[#2B3138] bg-[#11151A] px-4 py-3 focus:border-[#BFC7D1] focus:outline-none"
               />
@@ -283,7 +293,7 @@ export default function OrvzPage() {
                 type="submit"
                 className="mt-4 w-full rounded-xl border border-[#BFC7D1] px-6 py-3 text-[#E6EBF0] transition duration-500 hover:bg-[#BFC7D1] hover:text-black"
               >
-                Umów konsultację
+                {t("form.submit")}
               </button>
             </form>
           </Reveal>
@@ -294,8 +304,8 @@ export default function OrvzPage() {
                 <p key={detail}>{detail}</p>
               ))}
               <div className="mt-6 text-sm text-[#A7ADB5]">
-                <p>Odpowiadamy zazwyczaj w ciągu 24h</p>
-                <p>Realizacje premium na terenie całej Polski</p>
+                <p>{t("response.time")}</p>
+                <p>{t("response.area")}</p>
               </div>
             </div>
           </Reveal>
@@ -307,12 +317,12 @@ export default function OrvzPage() {
           <div>
             <h4 className="mb-4 text-lg tracking-widest text-white">ORAZ MEBLE</h4>
             <p className="text-sm leading-relaxed text-[#A7ADB5]">
-              Meble na wymiar dla klientów premium. Projektujemy i realizujemy wnętrza dopasowane do Twojego stylu życia.
+              {t("footer.brandDesc")}
             </p>
           </div>
 
           <div>
-            <h5 className="mb-4 text-white">Kontakt</h5>
+            <h5 className="mb-4 text-white">{t("footer.contact")}</h5>
             <div className="space-y-2">
               {contactDetails.map((detail) => (
                 <p key={`footer-${detail}`}>{detail}</p>
@@ -321,7 +331,7 @@ export default function OrvzPage() {
           </div>
 
           <div>
-            <h5 className="mb-4 text-white">Dane firmy</h5>
+            <h5 className="mb-4 text-white">{t("footer.company")}</h5>
             <p>NIP: 611 135 13 84</p>
             <div className="mt-6 flex gap-4">
               {socialLinks.map(({ label, href, Icon }) => (
@@ -334,9 +344,17 @@ export default function OrvzPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-6xl border-t border-[#2B3138] pt-6 text-center text-xs text-[#8A9098]">
-          © {new Date().getFullYear()} ORAZ MEBLE. Wszelkie prawa zastrzeżone.
+          © {new Date().getFullYear()} {t("footer.copyright")}
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <OrvzPage />
+    </LanguageProvider>
   );
 }

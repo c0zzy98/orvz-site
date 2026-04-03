@@ -1,21 +1,51 @@
 import { motion } from "framer-motion";
 import { LanguageProvider, useTranslation } from "./i18n/LanguageContext";
 
+const headingRevealVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
 function SectionHeading({ eyebrow, title, description }) {
   return (
-    <div className="max-w-3xl mb-12 text-left">
+    <div className="max-w-3xl mb-12 text-left overflow-hidden">
       {eyebrow && (
-        <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[#A7ADB5] md:text-sm">
+        <motion.p
+          custom={0}
+          variants={headingRevealVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          className="mb-4 text-xs uppercase tracking-[0.28em] text-[#A7ADB5] md:text-sm"
+        >
           {eyebrow}
-        </p>
+        </motion.p>
       )}
-      <h2 className="text-3xl font-light leading-tight tracking-[0.04em] text-[#F1F4F6] md:text-5xl">
+      <motion.h2
+        custom={eyebrow ? 1 : 0}
+        variants={headingRevealVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        className="text-3xl font-light leading-tight tracking-[0.04em] text-[#F1F4F6] md:text-5xl"
+      >
         {title}
-      </h2>
+      </motion.h2>
       {description && (
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#C7CCD3] md:text-lg">
+        <motion.p
+          custom={eyebrow ? 2 : 1}
+          variants={headingRevealVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          className="mt-4 max-w-2xl text-base leading-relaxed text-[#C7CCD3] md:text-lg"
+        >
           {description}
-        </p>
+        </motion.p>
       )}
     </div>
   );
@@ -104,6 +134,18 @@ const contactDetails = [
   "Telefon: +48 502 629 060",
 ];
 
+const businessHours = [
+  { hours: "08:00–21:00" },
+  { hours: "08:00–21:00" },
+  { hours: "08:00–21:00" },
+  { hours: "08:00–21:00" },
+  { hours: "08:00–21:00" },
+  { hours: "09:00–18:00" },
+  { hours: null },
+];
+
+const TODAY_INDEX = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+
 const quickContactCardLines = [
   ["ul. Ludowa 16", "58-560 Jelenia Góra", "orazmeble@gmail.com"],
   ["Jakub Gorlach", "tel. 530 497 662", "gorlachjakub@gmail.com"],
@@ -145,7 +187,7 @@ function OrvzPage() {
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-8">
-          <h1 className="text-xl tracking-[0.28em] text-[#E9EDF2]">ORVZ.EU</h1>
+          <a href="#" aria-label="Góra strony" className="text-xl tracking-[0.28em] text-[#E9EDF2] hover:text-white transition-colors duration-300">ORVZ.EU</a>
           <div className="flex items-center gap-6">
             <div className="space-x-6 text-sm">
               <a href="#realizacje" className="transition-colors duration-300 hover:text-[#D8DDE3]">
@@ -194,13 +236,11 @@ function OrvzPage() {
       </SectionShell>
 
       <SectionShell id="realizacje" className="py-24 md:py-32">
-        <Reveal>
-          <SectionHeading
-            eyebrow={t("realizacje.eyebrow")}
-            title={t("realizacje.title")}
-            description={t("realizacje.description")}
-          />
-        </Reveal>
+        <SectionHeading
+          eyebrow={t("realizacje.eyebrow")}
+          title={t("realizacje.title")}
+          description={t("realizacje.description")}
+        />
 
         <div className="grid gap-6 md:grid-cols-3">
           {realizations.map((item, index) => (
@@ -212,13 +252,11 @@ function OrvzPage() {
       </SectionShell>
 
       <SectionShell id="onas" className="py-24 md:py-32">
-        <Reveal>
-          <SectionHeading
-            eyebrow={t("onas.eyebrow")}
-            title={t("onas.title")}
-            description={t("onas.description")}
-          />
-        </Reveal>
+        <SectionHeading
+          eyebrow={t("onas.eyebrow")}
+          title={t("onas.title")}
+          description={t("onas.description")}
+        />
 
         <div className="grid gap-8 md:grid-cols-3">
           {locale.reasons.map((item, index) => (
@@ -258,13 +296,11 @@ function OrvzPage() {
       </SectionShell>
 
       <SectionShell id="kontakt" className="py-24 md:py-32">
-        <Reveal>
-          <SectionHeading
-            eyebrow={t("kontakt.eyebrow")}
-            title={t("kontakt.title")}
-            description={t("kontakt.description")}
-          />
-        </Reveal>
+        <SectionHeading
+          eyebrow={t("kontakt.eyebrow")}
+          title={t("kontakt.title")}
+          description={t("kontakt.description")}
+        />
 
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <Reveal delay={0.1}>
@@ -299,14 +335,38 @@ function OrvzPage() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="space-y-3 text-[#C7CCD3]">
-              {contactDetails.map((detail) => (
-                <p key={detail}>{detail}</p>
-              ))}
-              <div className="mt-6 text-sm text-[#A7ADB5]">
-                <p>{t("response.time")}</p>
-                <p>{t("response.area")}</p>
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-[#2B3138] bg-[#0C0F12] p-6">
+                <h4 className="mb-4 text-xs uppercase tracking-[0.24em] text-[#A7ADB5]">
+                  {t("hours.title")}
+                </h4>
+                <ul className="space-y-2">
+                  {businessHours.map((entry, i) => (
+                    <li
+                      key={i}
+                      className={`flex items-center justify-between text-sm ${
+                        i === TODAY_INDEX
+                          ? "font-medium text-white"
+                          : "text-[#C7CCD3]"
+                      }`}
+                    >
+                      <span>{locale.hours.days[i]}</span>
+                      <span
+                        className={
+                          entry.hours === null
+                            ? "text-[#8A9098]"
+                            : i === TODAY_INDEX
+                            ? "text-white"
+                            : "text-[#C7CCD3]"
+                        }
+                      >
+                        {entry.hours ?? t("hours.closed")}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
             </div>
           </Reveal>
         </div>

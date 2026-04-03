@@ -50,6 +50,11 @@
     "message": "Beschreiben Sie kurz das Projekt (z.B. Küche, Garderobe, Fläche, Standort...)",
     "submit": "Beratung buchen"
   },
+  "hours": {
+    "title": "Öffnungszeiten",
+    "closed": "Geschlossen",
+    "days": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+  },
   "response": {
     "time": "Wir antworten in der Regel innerhalb von 24h",
     "area": "Premium-Projekte in ganz Polen"

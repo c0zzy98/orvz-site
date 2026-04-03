@@ -50,6 +50,11 @@
     "message": "Opisz krótko projekt (np. kuchnia, garderoba, metraż, lokalizacja...)",
     "submit": "Umów konsultację"
   },
+  "hours": {
+    "title": "Godziny otwarcia",
+    "closed": "Zamknięte",
+    "days": ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+  },
   "response": {
     "time": "Odpowiadamy zazwyczaj w ciągu 24h",
     "area": "Realizacje premium na terenie całej Polski"

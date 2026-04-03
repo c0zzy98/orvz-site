@@ -50,6 +50,11 @@
     "message": "Stručně popište projekt (např. kuchyně, šatna, plocha, lokalita...)",
     "submit": "Domluvit konzultaci"
   },
+  "hours": {
+    "title": "Otevírací doba",
+    "closed": "Zavřeno",
+    "days": ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"]
+  },
   "response": {
     "time": "Obvykle odpovídáme do 24h",
     "area": "Prémiové realizace po celém Polsku"

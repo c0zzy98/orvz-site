@@ -50,6 +50,11 @@
     "message": "Briefly describe the project (e.g. kitchen, wardrobe, area, location...)",
     "submit": "Book consultation"
   },
+  "hours": {
+    "title": "Opening hours",
+    "closed": "Closed",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  },
   "response": {
     "time": "We usually respond within 24h",
     "area": "Premium projects across Poland"

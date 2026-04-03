@@ -281,10 +281,10 @@ function OrvzPage() {
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
       <Lightbox images={PROJECTS} index={lightboxIndex} onClose={closeLightbox} onPrev={prevImage} onNext={nextImage} />
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:py-6 md:px-8">
           <a href="#" aria-label="Góra strony" className="text-xl tracking-[0.28em] text-[#E9EDF2] hover:text-white transition-colors duration-300">ORVZ.EU</a>
-          <div className="flex items-center gap-6">
-            <div className="space-x-6 text-sm">
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="hidden md:flex space-x-6 text-sm">
               <a href="#realizacje" className="transition-colors duration-300 hover:text-[#D8DDE3]">
                 {t("nav.realizacje")}
               </a>

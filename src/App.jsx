@@ -2,7 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { LanguageProvider, useTranslation } from "./i18n/LanguageContext";
 
-const HERO_IMAGES = ["/hero/i1.png", "/hero/i2.png", "/hero/i3.png", "/hero/i4.png", "/hero/i5.png", "/hero/i6.png", "/hero/i7.png"];
+const BASE = import.meta.env.BASE_URL;
+const HERO_IMAGES = [`${BASE}hero/i1.png`, `${BASE}hero/i2.png`, `${BASE}hero/i3.png`, `${BASE}hero/i4.png`, `${BASE}hero/i5.png`, `${BASE}hero/i6.png`, `${BASE}hero/i7.png`];
 const SLIDE_INTERVAL = 5000;
 
 const headingRevealVariants = {
@@ -158,9 +159,9 @@ const quickContactCardLines = [
 
 const LANGUAGES = ["pl", "en", "de", "cz"];
 
-const PROJECTS = ["/projects/10.png", "/projects/11.png", "/projects/12.png", "/projects/13.png", "/projects/14.png", "/projects/15.png"];
+const PROJECTS = [`${BASE}projects/10.png`, `${BASE}projects/11.png`, `${BASE}projects/12.png`, `${BASE}projects/13.png`, `${BASE}projects/14.png`, `${BASE}projects/15.png`];
 
-const REASONS_IMAGES = ["/us/21.png", "/us/22.png", "/us/23.png"];
+const REASONS_IMAGES = [`${BASE}us/21.png`, `${BASE}us/22.png`, `${BASE}us/23.png`];
 
 function Lightbox({ images, index, onClose, onPrev, onNext }) {
   useEffect(() => {

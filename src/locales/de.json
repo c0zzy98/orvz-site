@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "realizacje": "Portfolio",
+    "onas": "Über uns",
+    "kontakt": "Kontakt"
+  },
+  "hero": {
+    "title": "Möbel nach Maß",
+    "subtitle": "Wir schaffen einzigartige Premium-Innenräume, die auf Ihren Raum und Lebensstil zugeschnitten sind.",
+    "cta": "Portfolio ansehen"
+  },
+  "realizacje": {
+    "eyebrow": "Portfolio",
+    "title": "Ausgewählte Projekte",
+    "description": "Minimalismus, Präzision und Premium-Materialien. Jedes Projekt wird individuell für einen bestimmten Raum gefertigt."
+  },
+  "onas": {
+    "eyebrow": "Warum wir",
+    "title": "Warum Sie uns vertrauen können",
+    "description": "Wir schaffen Lösungen, die Design, Funktionalität und höchste Qualität vereinen."
+  },
+  "reasons": [
+    {
+      "title": "Einzigartiges Design",
+      "desc": "Jedes Projekt wird individuell erstellt, angepasst an den Lebensstil und Raum des Kunden."
+    },
+    {
+      "title": "Handwerk & Technologie",
+      "desc": "Wir verbinden traditionelles Handwerk mit modernen Technologien für ein perfektes Ergebnis."
+    },
+    {
+      "title": "Kundenbetreuung",
+      "desc": "Wir begleiten den Kunden durch den gesamten Prozess – von der Konzeption bis zur Montage."
+    }
+  ],
+  "quickCards": [
+    { "title": "Büro" },
+    { "title": "Beratung" },
+    { "title": "Design & Angebot" }
+  ],
+  "kontakt": {
+    "eyebrow": "Kontakt",
+    "title": "Kostenlose Beratung buchen",
+    "description": "Erzählen Sie uns von Ihrem Raum und wir melden uns innerhalb von 24 Stunden mit einem Vorschlag."
+  },
+  "form": {
+    "name": "Vor- und Nachname",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer",
+    "message": "Beschreiben Sie kurz das Projekt (z.B. Küche, Garderobe, Fläche, Standort...)",
+    "submit": "Beratung buchen"
+  },
+  "hours": {
+    "title": "Öffnungszeiten",
+    "closed": "Geschlossen",
+    "days": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+  },
+  "response": {
+    "time": "Wir antworten in der Regel innerhalb von 24h",
+    "area": "Premium-Projekte in ganz Polen"
+  },
+  "footer": {
+    "brandDesc": "Maßgeschneiderte Möbel für Premium-Kunden. Wir planen und realisieren Innenräume nach Ihrem Lebensstil.",
+    "contact": "Kontakt",
+    "company": "Firmendaten",
+    "copyright": "ORAZ MEBLE. Alle Rechte vorbehalten."
+  }
+}

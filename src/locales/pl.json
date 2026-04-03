@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "realizacje": "Realizacje",
+    "onas": "O nas",
+    "kontakt": "Kontakt"
+  },
+  "hero": {
+    "title": "Meble na wymiar",
+    "subtitle": "Tworzymy unikalne wnętrza premium dopasowane do Twojej przestrzeni i stylu życia.",
+    "cta": "Zobacz realizacje"
+  },
+  "realizacje": {
+    "eyebrow": "Realizacje",
+    "title": "Wybrane realizacje",
+    "description": "Minimalizm, precyzja wykonania i materiały premium. Każdy projekt powstaje indywidualnie pod konkretną przestrzeń."
+  },
+  "onas": {
+    "eyebrow": "Dlaczego my",
+    "title": "Dlaczego warto nam zaufać",
+    "description": "Tworzymy rozwiązania, które łączą design, funkcjonalność i najwyższą jakość wykonania."
+  },
+  "reasons": [
+    {
+      "title": "Unikalne projektowanie",
+      "desc": "Każdy projekt powstaje indywidualnie, dopasowany do stylu życia i przestrzeni klienta."
+    },
+    {
+      "title": "Rzemiosło i technologia",
+      "desc": "Łączymy tradycyjne rzemiosło z nowoczesnymi technologiami dla perfekcyjnego efektu."
+    },
+    {
+      "title": "Wsparcie klienta",
+      "desc": "Prowadzimy klienta przez cały proces – od koncepcji po montaż."
+    }
+  ],
+  "quickCards": [
+    { "title": "Biuro" },
+    { "title": "Konsultacja" },
+    { "title": "Projekt i wycena" }
+  ],
+  "kontakt": {
+    "eyebrow": "Kontakt",
+    "title": "Umów się na bezpłatną konsultację",
+    "description": "Opowiedz nam o swojej przestrzeni, a wrócimy z propozycją dalszych kroków w ciągu 24 godzin."
+  },
+  "form": {
+    "name": "Imię i nazwisko",
+    "email": "Adres email",
+    "phone": "Numer telefonu",
+    "message": "Opisz krótko projekt (np. kuchnia, garderoba, metraż, lokalizacja...)",
+    "submit": "Umów konsultację"
+  },
+  "hours": {
+    "title": "Godziny otwarcia",
+    "closed": "Zamknięte",
+    "days": ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+  },
+  "response": {
+    "time": "Odpowiadamy zazwyczaj w ciągu 24h",
+    "area": "Realizacje premium na terenie całej Polski"
+  },
+  "footer": {
+    "brandDesc": "Meble na wymiar dla klientów premium. Projektujemy i realizujemy wnętrza dopasowane do Twojego stylu życia.",
+    "contact": "Kontakt",
+    "company": "Dane firmy",
+    "copyright": "ORAZ MEBLE. Wszelkie prawa zastrzeżone."
+  }
+}

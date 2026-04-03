@@ -1,5 +1,9 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { LanguageProvider, useTranslation } from "./i18n/LanguageContext";
+
+const HERO_IMAGES = ["/hero/i1.png", "/hero/i2.png", "/hero/i3.png", "/hero/i4.png", "/hero/i5.png", "/hero/i6.png", "/hero/i7.png"];
+const SLIDE_INTERVAL = 5000;
 
 const headingRevealVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -154,6 +158,8 @@ const quickContactCardLines = [
 
 const LANGUAGES = ["pl", "en", "de", "cz"];
 
+const PROJECTS = ["/projects/10.png", "/projects/11.png", "/projects/12.png", "/projects/13.png", "/projects/14.png", "/projects/15.png"];
+
 const realizations = [1, 2, 3, 4, 5, 6];
 
 function LanguageSwitcher() {
@@ -183,6 +189,14 @@ function LanguageSwitcher() {
 
 function OrvzPage() {
   const { t, locale } = useTranslation();
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, SLIDE_INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
@@ -205,8 +219,25 @@ function OrvzPage() {
         </div>
       </nav>
 
-      <SectionShell className="min-h-[90vh] flex items-center">
-        <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        {/* crossfade slideshow */}
+        <AnimatePresence>
+          <motion.div
+            key={slideIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${HERO_IMAGES[slideIndex]}')` }}
+          />
+        </AnimatePresence>
+        {/* dark overlay so text stays readable */}
+        <div className="absolute inset-0 bg-black/20" />
+        {/* bottom gradient fade into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent" />
+
+        <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center px-6 text-center md:px-8">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -233,7 +264,7 @@ function OrvzPage() {
             {t("hero.cta")}
           </motion.a>
         </div>
-      </SectionShell>
+      </section>
 
       <SectionShell id="realizacje" className="py-24 md:py-32">
         <SectionHeading
@@ -243,9 +274,16 @@ function OrvzPage() {
         />
 
         <div className="grid gap-6 md:grid-cols-3">
-          {realizations.map((item, index) => (
-            <Reveal key={item} delay={index * 0.05}>
-              <div className="h-64 rounded-2xl border border-[#2B3138] bg-[#11151A] transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80" />
+          {PROJECTS.map((src, index) => (
+            <Reveal key={src} delay={index * 0.05}>
+              <div className="h-64 rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80">
+                <img
+                  src={src}
+                  alt={`Realizacja ${index + 1}`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </Reveal>
           ))}
         </div>

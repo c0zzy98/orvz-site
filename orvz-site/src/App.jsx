@@ -162,6 +162,79 @@ const PROJECTS = ["/projects/10.png", "/projects/11.png", "/projects/12.png", "/
 
 const realizations = [1, 2, 3, 4, 5, 6];
 
+function Lightbox({ images, index, onClose, onPrev, onNext }) {
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <AnimatePresence>
+      {index !== null && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          {/* prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onPrev(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-[#2B3138] bg-black/60 p-3 text-white transition hover:border-[#8E98A3] hover:bg-black/80"
+            aria-label="Poprzednie"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2"><path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+
+          {/* image */}
+          <motion.img
+            key={index}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            src={images[index]}
+            alt={`Realizacja ${index + 1}`}
+            className="max-h-[88vh] max-w-[88vw] rounded-xl object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          {/* next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); onNext(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-[#2B3138] bg-black/60 p-3 text-white transition hover:border-[#8E98A3] hover:bg-black/80"
+            aria-label="Następne"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2"><path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+
+          {/* close */}
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 rounded-full border border-[#2B3138] bg-black/60 p-2 text-white transition hover:border-[#8E98A3] hover:bg-black/80"
+            aria-label="Zamknij"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-2"><path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" /></svg>
+          </button>
+
+          {/* counter */}
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-[#8A9098]">
+            {index + 1} / {images.length}
+          </span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+
 function LanguageSwitcher() {
   const { lang, setLang } = useTranslation();
   return (
@@ -190,6 +263,12 @@ function LanguageSwitcher() {
 function OrvzPage() {
   const { t, locale } = useTranslation();
   const [slideIndex, setSlideIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const openLightbox = (i) => setLightboxIndex(i);
+  const closeLightbox = () => setLightboxIndex(null);
+  const prevImage = () => setLightboxIndex((i) => (i - 1 + PROJECTS.length) % PROJECTS.length);
+  const nextImage = () => setLightboxIndex((i) => (i + 1) % PROJECTS.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -199,6 +278,7 @@ function OrvzPage() {
   }, []);
   return (
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
+      <Lightbox images={PROJECTS} index={lightboxIndex} onClose={closeLightbox} onPrev={prevImage} onNext={nextImage} />
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 md:px-8">
           <a href="#" aria-label="Góra strony" className="text-xl tracking-[0.28em] text-[#E9EDF2] hover:text-white transition-colors duration-300">ORVZ.EU</a>
@@ -276,13 +356,21 @@ function OrvzPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {PROJECTS.map((src, index) => (
             <Reveal key={src} delay={index * 0.05}>
-              <div className="h-64 rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80">
+              <div
+                className="group relative h-64 cursor-zoom-in rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80"
+                onClick={() => openLightbox(index)}
+              >
                 <img
                   src={src}
                   alt={`Realizacja ${index + 1}`}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition duration-300 group-hover:opacity-100">
+                  <div className="rounded-full bg-black/50 p-3 backdrop-blur-sm">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-white stroke-2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.35-4.35" strokeLinecap="round" /></svg>
+                  </div>
+                </div>
               </div>
             </Reveal>
           ))}

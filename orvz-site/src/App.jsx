@@ -160,7 +160,7 @@ const LANGUAGES = ["pl", "en", "de", "cz"];
 
 const PROJECTS = ["/projects/10.png", "/projects/11.png", "/projects/12.png", "/projects/13.png", "/projects/14.png", "/projects/15.png"];
 
-const realizations = [1, 2, 3, 4, 5, 6];
+const REASONS_IMAGES = ["/us/21.png", "/us/22.png", "/us/23.png"];
 
 function Lightbox({ images, index, onClose, onPrev, onNext }) {
   useEffect(() => {
@@ -387,9 +387,14 @@ function OrvzPage() {
         <div className="grid gap-8 md:grid-cols-3">
           {locale.reasons.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.1}>
-              <div className="group relative h-80 overflow-hidden rounded-2xl border border-[#2B3138] bg-[#11151A]">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#2F3640] to-black opacity-60" />
-                <div className="absolute inset-0 bg-black/40 opacity-0 transition duration-500 group-hover:opacity-100" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[#2B3138] bg-[#11151A]">
+                <img
+                  src={REASONS_IMAGES[index]}
+                  alt={item.title}
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-end p-6">
                   <h4 className="mb-2 text-xl tracking-wide text-[#F1F4F6]">{item.title}</h4>
                   <p className="translate-y-4 text-sm text-[#D8DDE3] opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">

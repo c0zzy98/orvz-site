@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { LanguageProvider, useTranslation } from "./i18n/LanguageContext";
+import projectFiles from "./projects-manifest.json";
 
 const BASE = import.meta.env.BASE_URL;
 const HERO_IMAGES = [`${BASE}hero/i1.png`, `${BASE}hero/i2.png`, `${BASE}hero/i3.png`, `${BASE}hero/i4.png`, `${BASE}hero/i5.png`, `${BASE}hero/i6.png`, `${BASE}hero/i7.png`];
@@ -159,8 +160,7 @@ const quickContactCardLines = [
 
 const LANGUAGES = ["pl", "en", "de", "cz"];
 
-const PROJECTS = [`${BASE}projects/10.png`, `${BASE}projects/11.png`, `${BASE}projects/12.png`, `${BASE}projects/13.png`, `${BASE}projects/14.png`, `${BASE}projects/15.png`];
-const PROJECTS_EXTRA = [`${BASE}projects/16.png`, `${BASE}projects/17.png`, `${BASE}projects/18.png`];
+const ALL_PROJECTS = projectFiles.map((f) => `${BASE}projects/${f}`);
 
 const REASONS_IMAGES = [`${BASE}us/21.png`, `${BASE}us/22.png`, `${BASE}us/23.png`];
 
@@ -267,8 +267,11 @@ function OrvzPage() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [showMore, setShowMore] = useState(false);
+  const [shuffled] = useState(() => [...ALL_PROJECTS].sort(() => Math.random() - 0.5));
 
-  const displayedProjects = showMore ? [...PROJECTS, ...PROJECTS_EXTRA] : PROJECTS;
+  const projects = shuffled.slice(0, 6);
+  const projectsExtra = shuffled.slice(6);
+  const displayedProjects = showMore ? shuffled : projects;
 
   const openLightbox = (i) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
@@ -359,7 +362,7 @@ function OrvzPage() {
         />
 
         <div className="grid gap-6 md:grid-cols-3">
-          {PROJECTS.map((src, index) => (
+          {projects.map((src, index) => (
             <Reveal key={src} delay={index * 0.05}>
               <div
                 className="group relative h-64 cursor-zoom-in rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80"
@@ -389,15 +392,15 @@ function OrvzPage() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 grid gap-6 md:grid-cols-3"
             >
-              {PROJECTS_EXTRA.map((src, index) => (
+              {projectsExtra.map((src, index) => (
                 <Reveal key={src} delay={index * 0.07}>
                   <div
                     className="group relative h-64 cursor-zoom-in rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80"
-                    onClick={() => openLightbox(PROJECTS.length + index)}
+                    onClick={() => openLightbox(projects.length + index)}
                   >
                     <img
                       src={src}
-                      alt={`Realizacja ${PROJECTS.length + index + 1}`}
+                      alt={`Realizacja ${projects.length + index + 1}`}
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                       loading="lazy"
                     />

@@ -160,6 +160,7 @@ const quickContactCardLines = [
 const LANGUAGES = ["pl", "en", "de", "cz"];
 
 const PROJECTS = [`${BASE}projects/10.png`, `${BASE}projects/11.png`, `${BASE}projects/12.png`, `${BASE}projects/13.png`, `${BASE}projects/14.png`, `${BASE}projects/15.png`];
+const PROJECTS_EXTRA = [`${BASE}projects/16.png`, `${BASE}projects/17.png`, `${BASE}projects/18.png`];
 
 const REASONS_IMAGES = [`${BASE}us/21.png`, `${BASE}us/22.png`, `${BASE}us/23.png`];
 
@@ -265,11 +266,14 @@ function OrvzPage() {
   const { t, locale } = useTranslation();
   const [slideIndex, setSlideIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [showMore, setShowMore] = useState(false);
+
+  const displayedProjects = showMore ? [...PROJECTS, ...PROJECTS_EXTRA] : PROJECTS;
 
   const openLightbox = (i) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
-  const prevImage = () => setLightboxIndex((i) => (i - 1 + PROJECTS.length) % PROJECTS.length);
-  const nextImage = () => setLightboxIndex((i) => (i + 1) % PROJECTS.length);
+  const prevImage = () => setLightboxIndex((i) => (i - 1 + displayedProjects.length) % displayedProjects.length);
+  const nextImage = () => setLightboxIndex((i) => (i + 1) % displayedProjects.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -279,7 +283,7 @@ function OrvzPage() {
   }, []);
   return (
     <div className="min-h-screen bg-black font-sans text-white scroll-smooth selection:bg-[#BFC7D1] selection:text-black">
-      <Lightbox images={PROJECTS} index={lightboxIndex} onClose={closeLightbox} onPrev={prevImage} onNext={nextImage} />
+      <Lightbox images={displayedProjects} index={lightboxIndex} onClose={closeLightbox} onPrev={prevImage} onNext={nextImage} />
       <nav className="sticky top-0 z-50 border-b border-[#2B3138] bg-black/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:py-6 md:px-8">
           <a href="#" aria-label="Góra strony" className="text-xl tracking-[0.28em] text-[#E9EDF2] hover:text-white transition-colors duration-300">ORVZ.EU</a>
@@ -375,6 +379,59 @@ function OrvzPage() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <AnimatePresence>
+          {showMore && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 grid gap-6 md:grid-cols-3"
+            >
+              {PROJECTS_EXTRA.map((src, index) => (
+                <Reveal key={src} delay={index * 0.07}>
+                  <div
+                    className="group relative h-64 cursor-zoom-in rounded-2xl border border-[#2B3138] overflow-hidden transition duration-500 hover:-translate-y-1 hover:scale-[1.02] md:h-80"
+                    onClick={() => openLightbox(PROJECTS.length + index)}
+                  >
+                    <img
+                      src={src}
+                      alt={`Realizacja ${PROJECTS.length + index + 1}`}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition duration-300 group-hover:opacity-100">
+                      <div className="rounded-full bg-black/50 p-3 backdrop-blur-sm">
+                        <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-white stroke-2"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.35-4.35" strokeLinecap="round" /></svg>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="mt-10 flex flex-col items-center gap-5">
+          {!showMore && (
+            <button
+              onClick={() => setShowMore(true)}
+              className="flex items-center gap-2 text-sm text-[#8A9098] transition-colors duration-300 hover:text-[#C7CCD3]"
+            >
+              <span className="tracking-wide">Pokaż więcej</span>
+              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current stroke-2"><path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+          )}
+          <a
+            href="https://www.instagram.com/oraz.meble/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-full border border-[#2B3138] px-8 py-3.5 text-[#C7CCD3] transition duration-300 hover:border-[#8E98A3] hover:text-white"
+          >
+            <InstagramIcon />
+            <span className="text-base tracking-wide">Zobacz więcej na Instagramie</span>
+          </a>
         </div>
       </SectionShell>
 
